@@ -7,7 +7,7 @@ const program = require('commander');
 const path = require('path');
 
 program
-  .usage('-h <host> -d <database> -u <user> -x [password] -p [port]  --dialect [dialect] -c [/path/to/config] -o [/path/to/models] -t [tableName]')
+  .usage('-h <host> -d <database> -u <user> -x [password] -p [port]  --dialect [dialect] -c [/path/to/config] -o [/path/to/models] -t [tableName] -z')
   .version(require('../package.json').version)
   .option('-h, --host [host]', 'hostname or ip for the database', 'localhost')
   .option('-d, --database <database>', 'database name')
@@ -22,6 +22,7 @@ program
   .option('-t, --tables <names>', 'comma-separated names of tables to import')
   .option('-T, --skip-tables <names>', 'comma-separated names of tables to skip')
   .option('-C, --camel', 'use camel case to name models and fields')
+  .option('-z, --typescript', 'Output models as typescript with a definitions file')
   .parse(process.argv);
 
 const config = {
@@ -40,7 +41,8 @@ const config = {
   directory: program.output || path.join(process.cwd(), './app/model'),
   tables: !!program.tables ? program.tables.split(',') : null,
   skipTables: !!program.skipTables ? program.skipTables.split(',') : null,
-  camelCase: !!program.camelCase
+  camelCase: !!program.camelCase,
+  typescript: !!program.typescript
 };
 
 if (!!program.config) {
