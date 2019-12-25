@@ -151,3 +151,32 @@ const auto = new EggSequelizeAuto('database', 'user', 'pass', {
     //...
 })
 ```
+## Within TS
+
+```ts
+import * as  SequelizeAuto from 'egg-sequelize-auto'
+import { Application } from 'egg';
+import { EggSequelizeOptions } from 'egg-sequelize';
+
+export default (app: Application) => {
+    const { database, username, password } = app.config.sequelize as EggSequelizeOptions
+    const auto = new SequelizeAuto(database, username, password, {
+        ...{
+            additional: {
+                timestamps: false,
+                underscored: false
+            },
+            typescript: true,
+            tables: []
+        }, ...app.config.sequelize
+    });
+
+    // console.log(auto)
+    auto.run(function (err) {
+        if (err) throw err;
+
+        console.log(auto.tables); // table list
+        console.log(auto.foreignKeys); // foreign key list
+    });
+}
+```
