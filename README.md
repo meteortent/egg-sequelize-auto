@@ -3,6 +3,7 @@
 Automatically generate models for [egg-sequelize](https://github.com/eggjs/egg-sequelize) via the command line.
 
 NOTE: Egg-Sequelize-Auto is based on [Sequelize-Auto](https://github.com/sequelize/sequelize-auto).
+Additional: Supports TS within egg-sequelize plugin and upgrade some dependencies' version, now you can readily use it to generate models of mssql as well~
 
 ## Why Egg-Sequelize-Auto
 
